@@ -7,6 +7,6 @@ services:
         ports:
             - ${PORT}:${PORT}
         volumes:
-            - ./:/var/www
-        working_dir: /var/www
+            - ./:/usr/src/node-app/
+        working_dir: /usr/src/node-app/
         command: ["node", "dist/"]
