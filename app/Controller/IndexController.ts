@@ -1,10 +1,10 @@
 import {Request, Response} from 'express';
-import Controller from "../../Controller";
+import Controller from "../Controller";
 
-export default class TestController extends Controller {
+export default class IndexController extends Controller {
     public process(request: Request, response: Response): Response {
         return response.json({
-            success: true
+            message: 'super index message'
         });
     }
 }

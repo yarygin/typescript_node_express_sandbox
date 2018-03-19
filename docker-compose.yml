@@ -10,3 +10,5 @@ services:
             - ./:/usr/src/node-app/
         working_dir: /usr/src/node-app/
         command: ["node", "dist/"]
+        environment:
+            - PORT
