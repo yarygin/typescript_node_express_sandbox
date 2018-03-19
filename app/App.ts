@@ -5,14 +5,23 @@ import TestController from "./Controller/TestController";
 import StoriesController from "./Controller/StoriesController";
 import IsTesterMiddleware from "./Middleware/IsTesterMiddleware";
 import {Express} from "express";
+import Route from "./Route";
+import Middleware from "./Middleware";
 
 export default class App {
     private express: Express;
     private readonly port: number;
+    private routes: Array<Route>;
 
     constructor(_port: number) {
         this.port = _port;
         this.express = express();
+        this.routes = [
+            new Route('/', 'get', new IndexController()),
+            new Route('/about', 'get', new AboutController(), [new IsTesterMiddleware()]),
+            new Route('/test', 'get', new TestController()),
+            new Route('/stories', 'get', new StoriesController()),
+        ];
         this.mountRoutes();
     }
 
@@ -22,14 +31,12 @@ export default class App {
 
     private mountRoutes(): void {
         const router = express.Router();
-        router.get('/', (new IndexController()).asRequestHandler());
-
-        router.use('/about', (new IsTesterMiddleware()).asRequestHandler());
-        router.get('/about', (new AboutController()).asRequestHandler());
-
-        router.get('/test', (new TestController()).asRequestHandler());
-        router.get('/stories', (new StoriesController()).asRequestHandler());
-
+        this.routes.forEach((route:Route) => {
+            route.middlewares.forEach((middleware:Middleware) => {
+                router.use(route.path, middleware.asRequestHandler());
+            });
+            router[route.method](route.path, route.controller.asRequestHandler());
+        });
         this.express.use(router);
     }
 }
