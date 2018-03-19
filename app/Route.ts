@@ -5,7 +5,7 @@ export default class Route {
     readonly path: string;
     readonly method: string;
     readonly controller: Controller;
-    readonly middlewares: Array<Middleware>;
+    readonly middlewares: Array<Middleware> = [];
 
     constructor(path: string, method: string, controller: Controller, middlewares: Array<Middleware> = []) {
         this.path = path;
