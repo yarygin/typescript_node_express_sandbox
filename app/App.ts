@@ -24,9 +24,9 @@ export default class App {
         const router = express.Router();
         this.routes.forEach((route: Route) => {
             route.middlewares.forEach((middleware: Middleware) => {
-                router.use(route.path, middleware.asRequestHandler());
+                router.use(route.path, middleware.process.bind(middleware));
             });
-            router[route.method](route.path, route.controller.asRequestHandler());
+            router[route.method](route.path, route.controller.process.bind(route.controller));
         });
         this.express.use(router);
     }
