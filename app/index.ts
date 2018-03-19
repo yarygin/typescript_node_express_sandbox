@@ -1,6 +1,6 @@
 import App from './App';
 
-const port = Number.parseInt(process.env.PORT) || 30300;
+const port = Number.parseInt(process.env.PORT) || 3000;
 const app = new App(port);
 app.run((err: Error) => {
     if (err) {
