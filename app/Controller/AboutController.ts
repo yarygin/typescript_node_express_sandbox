@@ -5,7 +5,7 @@ export default class AboutController extends Controller {
     public process(request: Request, response: Response): Response {
         let name = request.query.name || 'nobody';
         return response.json({
-            message: 'about ' + name
+            message: 'lets talk about ' + name
         });
     }
 }
