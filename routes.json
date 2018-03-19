@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/",
+    "method": "GET",
+    "controller": "indexController",
+    "middleware": []
+  },
+  {
+    "path": "/about",
+    "method": "GET",
+    "controller": "aboutController",
+    "middleware": []
+  },
+  {
+    "path": "/test",
+    "method": "GET",
+    "controller": "testController",
+    "middleware": []
+  }
+]
